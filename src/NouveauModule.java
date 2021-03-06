@@ -1,49 +1,130 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class NouveauModule extends JFrame {
 	private ResultSet rs=null;
 	private PreparedStatement ps=null;
-	private Connection cn = null;
-
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NouveauModule frame = new NouveauModule();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private JTextField textField;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	
+	public String attribuerCode() {  //attribuer un code constitué de: la date + l'heure exacte
+		Calendar cal= new GregorianCalendar();
+		int day= cal.get(Calendar.DAY_OF_MONTH);
+		int month= (cal.get(Calendar.MONTH))+1;
+		int year= cal.get(Calendar.YEAR);				
+		int hour= cal.get(Calendar.HOUR_OF_DAY);
+		int minute= cal.get(Calendar.MINUTE);
+		int second= cal.get(Calendar.SECOND);
+		
+		return new String(String.valueOf(day) + String.valueOf(month) + String.valueOf(year) + String.valueOf(hour) + String.valueOf(minute) + String.valueOf(second));
+		
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public NouveauModule() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		setTitle("Nouveau Module");
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Ajouter un nouveau Module");
+		lblNewLabel.setForeground(SystemColor.textHighlight);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 36));
+		lblNewLabel.setBounds(10, 11, 729, 75);
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(226, 123, 317, 37);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(226, 231, 317, 37);
+		contentPane.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(226, 339, 317, 37);
+		contentPane.add(textField_3);
+		
+		JButton btnNewButton = new JButton("Ajouter");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				 String sql="insert into module values(?,?,?,?)";
+				try {
+					ps=connection.getConn().prepareStatement(sql);
+					
+					ps.setString(2, textField.getText().toString());
+					ps.setInt(3,  Integer.parseInt(textField_2.getText()));        
+					ps.setString(4, textField_3.getText().toString());
+					ps.setString(1,textField.getText() +textField_2.getText()+ attribuerCode());
+				
+				int result = ps.executeUpdate();	
+				if(result !=0) {
+					JOptionPane.showMessageDialog(null, "Inscription avec succès !");	
+						dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Il y a un problème...");	
+				}
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(null,"Un problème est survenu..." +  ex.getMessage());
+				
+				}
+				finally {					
+					try {						
+						ps.close();
+					}catch(Exception ex) {
+					}
+				}
+			}
+		});
+		btnNewButton.setForeground(SystemColor.textHighlight);
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setBounds(284, 562, 195, 37);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_1 = new JLabel("Libell\u00E9");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1.setForeground(SystemColor.textHighlight);
+		lblNewLabel_1.setBounds(65, 134, 151, 26);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblPrenom = new JLabel("Coefficient");
+		lblPrenom.setForeground(SystemColor.textHighlight);
+		lblPrenom.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPrenom.setBounds(65, 242, 151, 26);
+		contentPane.add(lblPrenom);
+		
+		JLabel lblGroupe = new JLabel("Etudiant");
+		lblGroupe.setForeground(SystemColor.textHighlight);
+		lblGroupe.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblGroupe.setBounds(65, 350, 151, 26);
+		contentPane.add(lblGroupe);
+		setTitle("Inscription de l'Etudiant");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Menu.class.getResource("/Images/1595344305_44032.jpg")));
 	}
 

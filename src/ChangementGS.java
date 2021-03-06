@@ -31,25 +31,7 @@ public class ChangementGS extends JFrame {
 	private JTextField textField_4;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChangementGS frame = new ChangementGS();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ChangementGS() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 700);
@@ -59,6 +41,7 @@ public class ChangementGS extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Modification des informations de l'etudiant");
+		lblNewLabel.setForeground(SystemColor.textHighlight);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 34));
 		lblNewLabel.setBounds(10, 11, 764, 85);
 		contentPane.add(lblNewLabel);
@@ -132,6 +115,35 @@ public class ChangementGS extends JFrame {
 		contentPane.add(textField_4);
 		
 		JButton btnModifier = new JButton("Modifier");
+		btnModifier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 String sql="update etudiant set nom = ? , prenom = ? , groupe = ?, codeS = ? where matricule = ?";
+					try {
+						ps=connection.getConn().prepareStatement(sql);
+						ps.setString(1, textField_1.getText().toString());
+						ps.setString(2, textField_2.getText().toString());
+						ps.setString(3, textField_3.getText().toString());
+						ps.setString(4, textField_4.getText().toString());			
+						ps.setString(5, textField.getText().toString());
+					int result = ps.executeUpdate();	
+					if(result !=0) {
+						JOptionPane.showMessageDialog(null, "Modfication avec succès !");	
+							dispose();
+					}else {
+						JOptionPane.showMessageDialog(null, "Il y a un problème...");	
+					}
+					}catch(Exception ex) {
+						JOptionPane.showMessageDialog(null,"Un problème est survenu..." +  ex.getMessage());
+					
+					}
+					finally {					
+						try {						
+							ps.close();
+						}catch(Exception ex) {
+						}
+					}
+			}
+		});
 		btnModifier.setForeground(SystemColor.textHighlight);
 		btnModifier.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnModifier.setBounds(615, 395, 130, 28);
