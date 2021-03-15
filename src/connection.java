@@ -5,17 +5,16 @@ public class connection {
 	
 	
 	
-	private static Connection conn=null;
-	public static Connection  cnx() {
+	private static Connection conn = null;
+	public static void  cnx() {
 		
 		try {
 			  Class.forName("org.sqlite.JDBC");
 			 conn = DriverManager.getConnection("jdbc:sqlite:my_database.sqlite");
-					return conn;
+				
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null,e.getMessage());
 		
-			return null;
 		}
 	}
 	public static Connection getConn() {

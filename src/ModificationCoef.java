@@ -21,7 +21,6 @@ public class ModificationCoef extends JFrame {
 	private JPanel contentPane;
 	private ResultSet rs=null;
 	private PreparedStatement ps=null;
-	private Connection cn = null;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -49,7 +48,10 @@ public class ModificationCoef extends JFrame {
 		
 		JButton btnNewButton = new JButton("Rechercher");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {	
+				 int dialogButton = JOptionPane.YES_NO_OPTION;
+					int dialogResult = JOptionPane.showConfirmDialog (null, "Etes vous sur de vouloir modifier ce module ?","Warning", dialogButton);
+					if(dialogResult == 0){
 				try {				
 					String sql="select * from module where codeM = ? " ;
 					ps=connection.getConn().prepareStatement(sql);
@@ -77,6 +79,7 @@ public class ModificationCoef extends JFrame {
 					
 					}catch(Exception ex) {}
 				}
+			}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));

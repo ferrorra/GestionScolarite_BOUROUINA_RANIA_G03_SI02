@@ -8,30 +8,12 @@ import javax.swing.JFrame;
 public class GestionDeScolarite {
 	private ResultSet rs=null;
 	private PreparedStatement ps=null;
-	private Connection cn = null;
+
 
 
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GestionDeScolarite window = new GestionDeScolarite();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the application.
-	 */
 	public GestionDeScolarite() {
 		initialize();
 	}

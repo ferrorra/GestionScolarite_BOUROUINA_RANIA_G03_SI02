@@ -55,25 +55,6 @@ public class ListeEtudiantsparSections extends JFrame {
 		ListeEtudiantsparSections.textField_1 = textField_1;
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListeEtudiantsparSections frame = new ListeEtudiantsparSections();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public ListeEtudiantsparSections() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 700);

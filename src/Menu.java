@@ -35,10 +35,9 @@ public class Menu extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
-	private Connection conn=null;
 	private ResultSet rs=null;
 	private PreparedStatement ps=null;
-	private Connection cn = null;
+
 
 	public void show(ArrayList<JButton> buttons) {
 		show(buttons,true);
@@ -113,10 +112,10 @@ public class Menu extends JFrame{
 		btnEtats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ListeEtudiantsparSections().setVisible(true);
-				cn=connection.cnx();
+				
 				try {
 					String sql="select matricule, nom, prenom, groupe, codeS from etudiant ";
-					ps=cn.prepareStatement(sql);
+					ps=connection.getConn().prepareStatement(sql);
 					rs=ps.executeQuery();
 					ListeEtudiantsparSections.getTable().setModel(DbUtils.resultSetToTableModel(rs));
 				}catch(Exception exx) {
@@ -132,7 +131,7 @@ public class Menu extends JFrame{
 				try {
 
 					String sql="select distinct codeS from etudiant";
-					ps=cn.prepareStatement(sql);
+					ps=connection.getConn().prepareStatement(sql);
 					rs=ps.executeQuery();
 
 					while(rs.next())

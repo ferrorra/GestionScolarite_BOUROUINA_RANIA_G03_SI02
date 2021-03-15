@@ -12,30 +12,11 @@ import javax.swing.border.EmptyBorder;
 public class PreparationExamen extends JFrame {
 	private ResultSet rs=null;
 	private PreparedStatement ps=null;
-	private Connection cn = null;
 
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PreparationExamen frame = new PreparationExamen();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public PreparationExamen() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 700);

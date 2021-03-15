@@ -77,8 +77,7 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					
+				try {					
 				    connection.cnx(); 
 					Login frame = new Login();
 					frame.setVisible(true);
@@ -90,9 +89,7 @@ public class Login extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/Images/1595344305_44032.jpg"))); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

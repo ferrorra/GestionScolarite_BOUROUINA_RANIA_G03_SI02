@@ -100,6 +100,7 @@ public class Depart extends JFrame {
 		JButton btnImprimer = new JButton("Supprimer");
 		btnImprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
+				int result = 0;
 				 int dialogButton = JOptionPane.YES_NO_OPTION;
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Etes vous sur de vouloir supprimer cet Etudiant ?","Warning", dialogButton);
 				if(dialogResult == 0){		
@@ -107,13 +108,16 @@ public class Depart extends JFrame {
 				try {
 					ps=connection.getConn().prepareStatement(sql);
 					ps.setString(1, textField.getText());				
-					ps.executeUpdate();
+					result = ps.executeUpdate();
+					if(result > 0) {
 					JOptionPane.showMessageDialog(null,"L'Etudiant a bien été supprimé !");
 					dispose();
-				} catch (SQLException ex) {
+					}else {
+						JOptionPane.showMessageDialog(null,"L'Etudiant n'existe pas !");
+					}
+				} catch (Exception ex) {
 				}
-			}
-					 
+			}					 
 			}	
 		});
 		btnImprimer.setForeground(SystemColor.textHighlight);

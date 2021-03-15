@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.SystemColor;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Window.Type;
 import java.awt.Cursor;
 import java.awt.Rectangle;
@@ -18,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ImageIcon;
 
 public class Paperasse extends JFrame {
 
@@ -110,53 +112,60 @@ public class Paperasse extends JFrame {
 		panel.setLayout(null);
 		
 		lblNewLabel = new JLabel("Certificat de scolarit\u00E9");
+		lblNewLabel.setBounds(131, 152, 442, 88);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 38));
-		lblNewLabel.setBounds(10, 11, 442, 88);
 		panel.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("Matricule :");
+		lblNewLabel_1.setBounds(104, 265, 117, 33);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(77, 168, 117, 33);
 		panel.add(lblNewLabel_1);
 		
 		lblNom = new JLabel("Nom  :");
+		lblNom.setBounds(104, 309, 117, 33);
 		lblNom.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNom.setBounds(77, 252, 117, 33);
 		panel.add(lblNom);
 		
 		lblPrnom = new JLabel("Pr\u00E9nom  :");
+		lblPrnom.setBounds(104, 354, 117, 33);
 		lblPrnom.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblPrnom.setBounds(77, 327, 117, 33);
 		panel.add(lblPrnom);
 		
 		lblSection = new JLabel("Section  :");
+		lblSection.setBounds(104, 402, 117, 33);
 		lblSection.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblSection.setBounds(77, 423, 117, 33);
 		panel.add(lblSection);
 		
 		lblDate = new JLabel("Date  :");
+		lblDate.setBounds(104, 446, 117, 33);
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDate.setBounds(77, 539, 117, 33);
 		panel.add(lblDate);
 		
 		mat = new JLabel("mat");
-		mat.setBounds(193, 168, 173, 33);
+		mat.setBounds(220, 265, 173, 33);
 		panel.add(mat);
 		
 		nom = new JLabel("nom");
-		nom.setBounds(174, 252, 173, 33);
+		nom.setBounds(201, 309, 173, 33);
 		panel.add(nom);
 		
 		prenom = new JLabel("prenom");
-		prenom.setBounds(174, 327, 173, 33);
+		prenom.setBounds(201, 354, 173, 33);
 		panel.add(prenom);
 		
 		section = new JLabel("section");
-		section.setBounds(174, 423, 173, 33);
+		section.setBounds(201, 402, 173, 33);
 		panel.add(section);
 		
 		date = new JLabel("date");
-		date.setBounds(162, 539, 173, 33);
+		date.setBounds(189, 446, 173, 33);
 		panel.add(date);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(Paperasse.class.getResource("/Pictures/USTHB.png")));
+		
+
+		lblNewLabel_2.setBounds(10, 11, 188, 152);
+		panel.add(lblNewLabel_2);
 	}
 }
